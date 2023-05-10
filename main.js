@@ -39,4 +39,13 @@ document.getElementById('edad').addEventListener('keyup', e => {
 //Ejercicio 4
 document.getElementById('ej4').addEventListener('keyup', e=> {
     let ej4 = document.getElementById('ej4').value
+    let element = document.getElementsByClassName('ej4')
+    console.log(ej4)
+    if(ej4.charAt(0) == 'S' || ej4.charAt(0) == 's' || ej4.charAt(0) == 'n' || ej4.charAt(0) == 'n'){
+        console.log('true')
+        element[0].innerHTML = "Correcto"
+    }else{
+        console.log('false')
+        element[0].innerHTML = "Incorrecto"
+    }
 })
