@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <title>Ejercicios Egg-Javascript</title>
 </head>
@@ -32,14 +33,56 @@
             <h1>Ejercicio 3</h1>
             <p>Ingresa tu edad</p>
             <input type="number" name="edad" id="edad" placeholder="0">
-            <p id="res1" class="hidden">Eres Mayor de edad</p>
-            <p id="res2" class="hidden">Eres Menor de edad</p>
+            <p><span class="res1"></span></p>
+
         </div>
+        <br>
         <div class="ejercicio_4">
             <h1>Ejercicio 4</h1>
             <p>ingrese 'S' o 'N'</p>
             <input type="text" name="ej4" id="ej4" placeholder="S o N?" maxlength="1">
             <p><span class="ej4"></span></p>
+        </div>
+    </div>
+    <br>
+    <div class="ejercicio_5">
+        <h1>Ejercicio 5</h1>
+        <input class="operacion" id="operacion" placeholder="0" style="width: 35%; font-size: 30px;"></input>
+        <table class="calculadora">
+            <tr>
+                <td><button class="botones" type="button">1</button></td>
+                <td><button class="botones" type="button">2</button></td>
+                <td><button class="botones" type="button">3</button></td>
+                <td><button class="botones" id="diferent" type="button">+</button></td>
+            </tr>
+            <tr>
+                <td><button class="botones" type="button">4</button></td>
+                <td><button class="botones" type="button">5</button></td>
+                <td><button class="botones" type="button">6</button></td>
+                <td><button class="botones" id="diferent" type="button">-</button></td>
+            </tr>
+            <tr>
+                <td><button class="botones" type="button">7</button></td>
+                <td><button class="botones" type="button">8</button></td>
+                <td><button class="botones" type="button">9</button></td>
+                <td><button class="botones" id="diferent" type="button">*</button></td>
+            </tr>
+            <tr>
+                <td><button class="botones" id="diferent" type="button"><i class='bx bx-arrow-back'></i></button></td>
+                <td><button class="botones" type="button">0</button></td>
+                <td><button class="botones" id="diferent" type="button">/</button></td>
+                <td><button class="botones" id="diferent" type="button">=</button></td>
+            </tr>
+        </table>
+        <p>Resultado: <span id="resultado"></span></p>
+    </div>
+    <br>
+    <div class="container">
+        <div class="ejercicio_6">
+            <h1>Ejercicio 6</h1>
+            <p>Ingresa un numero te dire si es par o inpar</p>
+            <input type="text" id="parimpar" placeholder="0">
+            <p id="ej6">Ninguno de los dos</p>
         </div>
     </div>
     <script src="main.js"></script>
