@@ -46,13 +46,13 @@ document.getElementById('ej4').addEventListener('keyup', e => {
 })
 
 //Ejercicio 5
-let botones = document.getElementsByClassName('botones')
-let operacion = document.getElementById('operacion')
-let resultado = document.getElementById('resultado')
-let completo = ""
-let num1 = 0
-let num2 = 0
-let res = 0
+var botones = document.getElementsByClassName('botones')
+var operacion = document.getElementById('operacion')
+var resultado = document.getElementById('resultado')
+var completo = ""
+var num1 = 0
+var num2 = 0
+var res = 0
 operacion.addEventListener("keyup", e => {
     let op = operacion.value.toString()
     console.log(op)
@@ -139,12 +139,70 @@ document.getElementById('parimpar').addEventListener('keyup', e => {
     let parimpar = parseInt(document.getElementById('parimpar').value)
     console.log(parimpar)
     let ej6 = document.getElementById('ej6')
-    if(parimpar % 2 == 0){
+    if (parimpar % 2 == 0) {
         ej6.innerHTML = 'El numero es par'
-    }else{
+    } else {
         ej6.innerHTML = 'El numero es impar'
     }
-    if(Number.isNaN(parimpar)){
+    if (Number.isNaN(parimpar)) {
         ej6.innerHTML = 'Ninguno de los dos'
+    }
+})
+
+//Ejercicio 7
+
+function ejercicio_7() {
+    let limite = parseInt(prompt("Ingrese en valor entero positivo limite"))
+    let i = 0
+    do {
+        i += parseInt(prompt("Ingrese un numero: "))
+        alert("La suma de los numeros es: " + i + "\nPresione Aceptar")
+    } while (limite > i);
+}
+
+//Ejercicio 8
+var all = 0
+var nums = []
+var input = document.getElementById('ej8')
+document.getElementById('ej8').addEventListener('keypress', e => {
+    let num = parseInt(document.getElementById('ej8').value)
+    let res = document.getElementById('ej8res')
+    if (e.key === "Enter") {
+        all += num
+        if (num == 0) {
+            res.innerHTML = "<p>El mayor numero es: " + (Math.max(...nums)) +
+                "<br>El menor numero es: " + (Math.min.apply(null, nums)) +
+                "<br>El promedio de los numeros es: " + (all / nums.length) + "<p>"
+        } else {
+            nums.push(num)
+        }
+        console.log(Math.min.apply(null, nums))
+        console.log(nums)
+        input.value = ""
+    }
+})
+
+//Ejercicio 9
+document.getElementById('ej9').addEventListener('keypress', e => {
+    if (e.key === "Enter") {
+        let ej9 = document.getElementById('ej9').value
+        var res = ""
+        for (let i = 0; i < ej9.length; i++) {
+            res += ej9.charAt(i) + " "
+        }
+        document.getElementById('ej9res').innerHTML = "<p>"+res+"</p>"
+    }
+})
+
+//Ejercicio 10
+document.getElementById('ej10').addEventListener('keypress', e => {
+    if(e.key === "Enter"){
+        let ej10 = document.getElementById('ej10').value
+        var res = ""
+        for (let i = ej10.length; i > 0; i--){
+            res += ej10.charAt(i-1)
+        }
+        console.log(res)
+        document.getElementById('ej10res').innerHTML = "<P>"+res+"</p>"
     }
 })
