@@ -228,7 +228,12 @@ document.getElementById('ej11').addEventListener('keypress', e => {
 //Ejercicio 12
 function ejercicio_12(){
     let dato = prompt("Ingrese cualquier cosa")
-    alert("El tipo de dato ingresado es: " + typeof dato)
+    dato = parseInt(dato)
+    if(!isNaN(dato)){
+        alert("El tipo de dato es Int")
+    }else{
+        alert("El tipo de dato es String")
+    }
+    
 }
 
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
