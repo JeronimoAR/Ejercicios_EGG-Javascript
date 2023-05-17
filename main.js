@@ -164,19 +164,19 @@ function ejercicio_7() {
 var all = 0
 var nums = []
 var input = document.getElementById('ej8')
+var res = document.getElementById('ej8res')
 document.getElementById('ej8').addEventListener('keypress', e => {
-    let num = parseInt(document.getElementById('ej8').value)
-    let res = document.getElementById('ej8res')
     if (e.key === "Enter") {
+        let num = parseInt(document.getElementById('ej8').value)
         all += num
         if (num == 0) {
             res.innerHTML = "<p>El mayor numero es: " + (Math.max(...nums)) +
                 "<br>El menor numero es: " + (Math.min.apply(null, nums)) +
                 "<br>El promedio de los numeros es: " + (all / nums.length) + "<p>"
+            nums = []
         } else {
             nums.push(num)
         }
-        console.log(Math.min.apply(null, nums))
         console.log(nums)
         input.value = ""
     }
@@ -198,7 +198,7 @@ document.getElementById('ej9').addEventListener('keypress', e => {
 document.getElementById('ej10').addEventListener('keypress', e => {
     if(e.key === "Enter"){
         let ej10 = document.getElementById('ej10').value
-        var res = ""
+        let res = ""
         for (let i = ej10.length; i > 0; i--){
             res += ej10.charAt(i-1)
         }
@@ -206,3 +206,29 @@ document.getElementById('ej10').addEventListener('keypress', e => {
         document.getElementById('ej10res').innerHTML = "<P>"+res+"</p>"
     }
 })
+
+//Ejercicio 11
+document.getElementById('ej11').addEventListener('keypress', e => {
+    if(e.key === 'Enter'){
+        let ej11 = document.getElementById('ej11').value
+        let string = ej11.split(" ")
+        let tamanio = string[0].length
+        let res = string[0]
+        for (let i = 0; i < string.length; i++) {
+            if(tamanio < string[i].length){
+                res = string[i]
+                tamanio = res.length
+            }
+        }
+        let ej11res = document.getElementById('ej11res')
+        ej11res.innerHTML = res
+    }
+})
+
+//Ejercicio 12
+function ejercicio_12(){
+    let dato = prompt("Ingrese cualquier cosa")
+    alert("El tipo de dato ingresado es: " + typeof dato)
+}
+
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
