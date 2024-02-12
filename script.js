@@ -1,7 +1,7 @@
 let buttons = document.getElementsByClassName("buttons");
 let operation = document.getElementById("operation");
 let result = document.getElementById("result");
-let completo = "";
+let textResult = "";
 let num1 = 0;
 let num2 = 0;
 let res = 0;
@@ -65,43 +65,43 @@ for (let i = 0; i < buttons.length; i++) {
     let op = element.innerHTML.toString();
     console.log(op);
     if (op == "=") {
-      sum = completo.indexOf("+");
-      res = completo.indexOf("-");
-      mul = completo.indexOf("*");
-      div = completo.indexOf("/");
+      sum = textResult.indexOf("+");
+      res = textResult.indexOf("-");
+      mul = textResult.indexOf("*");
+      div = textResult.indexOf("/");
       if (sum > 0) {
-        num1 = parseInt(completo.substring(0, sum));
-        num2 = parseInt(completo.substring(sum + 1, completo.length));
+        num1 = parseInt(textResult.substring(0, sum));
+        num2 = parseInt(textResult.substring(sum + 1, textResult.length));
         res = num1 + num2;
       } else if (res > 0) {
-        num1 = parseInt(completo.substring(0, res));
-        num2 = parseInt(completo.substring(res + 1, completo.length));
+        num1 = parseInt(textResult.substring(0, res));
+        num2 = parseInt(textResult.substring(res + 1, textResult.length));
         res = num1 - num2;
       } else if (mul > 0) {
-        num1 = parseInt(completo.substring(0, mul));
-        num2 = parseInt(completo.substring(mul + 1, completo.length));
+        num1 = parseInt(textResult.substring(0, mul));
+        num2 = parseInt(textResult.substring(mul + 1, textResult.length));
         res = num1 * num2;
       } else if (div > 0) {
-        num1 = parseInt(completo.substring(0, div));
-        num2 = parseInt(completo.substring(div + 1, completo.length));
+        num1 = parseInt(textResult.substring(0, div));
+        num2 = parseInt(textResult.substring(div + 1, textResult.length));
         res = num1 / num2;
       }
-      completo = "0";
+      textResult = "0";
       result.innerHTML = res;
     }
 
     if (op.charAt(0) == "<") {
-      completo = completo.substring(0, completo.length - 1);
+      textResult = textResult.substring(0, textResult.length - 1);
     } else if (op == "=") {
-      completo = completo.substring(0, completo.length - 1);
+      textResult = textResult.substring(0, textResult.length - 1);
     } else {
-      completo += op;
+      textResult += op;
     }
-    operation.value = completo;
+    operation.value = textResult;
     if (operation.value == "") {
       operation.ariaPlaceholder = "0";
     }
-    console.log(completo);
+    console.log(textResult);
   });
 }
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
