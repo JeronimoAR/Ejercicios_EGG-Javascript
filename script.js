@@ -174,9 +174,6 @@ const initialiseButtonHandler = () => {
   })
 }
 
-
-
-
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
 
 const main = () => {
