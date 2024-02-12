@@ -103,7 +103,7 @@ const initialiseKeyboardHandler = () => {
 
 //<------------ original logic from Jero's forked repo ------------>//
 
-for (let i = 0; i < botones.length; i++) {
+/*for (let i = 0; i < botones.length; i++) {
   let element = botones[i];
   element.addEventListener('click', (e) => {
     let op = element.innerHTML.toString();
@@ -147,7 +147,27 @@ for (let i = 0; i < botones.length; i++) {
     }
     console.log(completo);
   });
+}*/
+const numberBtns = document.querySelectorAll('#Number')
+
+const inputNum = () => {
+  let number = 0
+  numberBtns.forEach((button) => {
+    number = button.innerText
+  })
+  document.getElementById("operacion").value += number
 }
+
+const clearCalc = () => {
+  document.getElementById("operacion").value = 0;
+  console.log('clear')
+}
+
+numberBtns.forEach((button) => {
+  button.addEventListener("click", inputNum)
+})
+
+
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
 
 const main = () => {

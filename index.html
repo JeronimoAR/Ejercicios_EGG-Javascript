@@ -19,33 +19,33 @@
             <input class="operacion" id="operacion" placeholder="0" style="width: 35%; font-size: 30px;"></input>
             <table class="calculadora">
                 <tr>
-                    <td><button class="botones" type="button">1</button></td>
-                    <td><button class="botones" type="button">2</button></td>
-                    <td><button class="botones" type="button">3</button></td>
+                    <td><button class="botones" id="Number" type="button">1</button></td>
+                    <td><button class="botones" id="Number" type="button">2</button></td>
+                    <td><button class="botones" id="Number" type="button">3</button></td>
                     <td><button class="botones" id="diferent" type="button">+</button></td>
                 </tr>
                 <tr>
-                    <td><button class="botones" type="button">4</button></td>
-                    <td><button class="botones" type="button">5</button></td>
-                    <td><button class="botones" type="button">6</button></td>
+                    <td><button class="botones" id="Number" type="button">4</button></td>
+                    <td><button class="botones" id="Number" type="button">5</button></td>
+                    <td><button class="botones" id="Number" type="button">6</button></td>
                     <td><button class="botones" id="diferent" type="button">-</button></td>
                 </tr>
                 <tr>
-                    <td><button class="botones" type="button">7</button></td>
-                    <td><button class="botones" type="button">8</button></td>
-                    <td><button class="botones" type="button">9</button></td>
+                    <td><button class="botones" id="Number" type="button">7</button></td>
+                    <td><button class="botones" id="Number" type="button">8</button></td>
+                    <td><button class="botones" id="Number" type="button">9</button></td>
                     <td><button class="botones" id="diferent" type="button">*</button></td>
                 </tr>
                 <tr>
                     <td><button class="botones" type="button">.</button></td>
-                    <td><button class="botones" type="button">0</button></td>
+                    <td><button class="botones" id="Number" type="button">0</button></td>
                     <td><button class="botones" id="diferent" type="button">=</button></td>
                     <td><button class="botones" id="diferent" type="button">/</button></td>
                 </tr>
                 <tr>
                     <!-- we can add a class here to center these buttons so it looks a bit better -->
                     <td><button class="botones" id="diferent" type="button"><i class='bx bx-arrow-back'></i></button></td>
-                    <td><button class="botones" id="diferent" type="button">Clear</button></td>
+                    <td><button class="botones" id="diferent" onclick="clearCalc()" type="button">Clear</button></td>
 
                 </tr>
             </table>
