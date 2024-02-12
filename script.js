@@ -161,14 +161,15 @@ const numberBtns = document.querySelectorAll('#Number')
 
 
 const clearCalc = () => {
-  document.getElementById("operation").value = 0;
+  operation.value = '';
+  operation.ariaPlaceholder = '0'
   console.log('clear')
 }
 
 const initialiseButtonHandler = () => {
   numberBtns.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      console.log(button.innerText)
+    button.addEventListener("click", () => {
+      operation.value += parseFloat(button.innerText);
     })
   })
 }
