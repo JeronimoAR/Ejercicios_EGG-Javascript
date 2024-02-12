@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" async defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" async defer></script>
     <title>Calculator - JS</title>
 </head>
 
 <body>
     <header>Calculator JS</header>
     <main>
-        <div class="ejercicio_5">
+        <section class="container">
             <h1>Calculator</h1>
             <!-- we should move all inline styling to the css stylesheet -->
-            <input class="operacion" id="operacion" placeholder="0" style="width: 35%; font-size: 30px;"></input>
-            <table class="calculadora">
+            <input class="operation" id="operation" placeholder="0"></input>
+            <table class="calculator">
                 <tr>
-                    <td><button class="botones" type="button">1</button></td>
-                    <td><button class="botones" type="button">2</button></td>
-                    <td><button class="botones" type="button">3</button></td>
-                    <td><button class="botones" id="diferent" type="button">+</button></td>
+                    <td><button class="buttons" type="button">1</button></td>
+                    <td><button class="buttons" type="button">2</button></td>
+                    <td><button class="buttons" type="button">3</button></td>
+                    <td><button class="buttons" id="diferent" type="button">+</button></td>
                 </tr>
                 <tr>
-                    <td><button class="botones" type="button">4</button></td>
-                    <td><button class="botones" type="button">5</button></td>
-                    <td><button class="botones" type="button">6</button></td>
-                    <td><button class="botones" id="diferent" type="button">-</button></td>
+                    <td><button class="buttons" type="button">4</button></td>
+                    <td><button class="buttons" type="button">5</button></td>
+                    <td><button class="buttons" type="button">6</button></td>
+                    <td><button class="buttons" id="diferent" type="button">-</button></td>
                 </tr>
                 <tr>
-                    <td><button class="botones" type="button">7</button></td>
-                    <td><button class="botones" type="button">8</button></td>
-                    <td><button class="botones" type="button">9</button></td>
-                    <td><button class="botones" id="diferent" type="button">*</button></td>
+                    <td><button class="buttons" type="button">7</button></td>
+                    <td><button class="buttons" type="button">8</button></td>
+                    <td><button class="buttons" type="button">9</button></td>
+                    <td><button class="buttons" id="diferent" type="button">*</button></td>
                 </tr>
                 <tr>
-                    <td><button class="botones" type="button">.</button></td>
-                    <td><button class="botones" type="button">0</button></td>
-                    <td><button class="botones" id="diferent" type="button">=</button></td>
-                    <td><button class="botones" id="diferent" type="button">/</button></td>
+                    <td><button class="buttons" type="button">.</button></td>
+                    <td><button class="buttons" type="button">0</button></td>
+                    <td><button class="buttons" id="diferent" type="button">=</button></td>
+                    <td><button class="buttons" id="diferent" type="button">/</button></td>
                 </tr>
                 <tr>
                     <!-- we can add a class here to center these buttons so it looks a bit better -->
-                    <td><button class="botones" id="diferent" type="button"><i class='bx bx-arrow-back'></i></button></td>
-                    <td><button class="botones" id="diferent" type="button">Clear</button></td>
+                    <td><button class="buttons" id="diferent" type="button"><i class='bx bx-arrow-back'></i></button>
+                    </td>
+                    <td><button class="buttons" id="diferent" type="button">Clear</button></td>
 
                 </tr>
             </table>
-            <p>Result: <span id="resultado"></span></p>
-        </div>
+            <p>Result: <span id="result"></span></p>
+        </section>
     </main>
     <footer></footer>
 </body>

@@ -1,6 +1,6 @@
-let botones = document.getElementsByClassName("botones");
-let operacion = document.getElementById("operacion");
-let resultado = document.getElementById("resultado");
+let buttons = document.getElementsByClassName("buttons");
+let operation = document.getElementById("operation");
+let result = document.getElementById("result");
 let completo = "";
 let num1 = 0;
 let num2 = 0;
@@ -12,7 +12,7 @@ const operate = (e) => {
   // we need to rework this function to also accept keyboard number inputs
 
   //<------------ original logic from Jero's forked repo ------------>//
-  let op = operacion.value.toString();
+  let op = operation.value.toString();
   console.log(op);
   if (e.key === "Enter") {
     sum = op.indexOf("+");
@@ -37,11 +37,11 @@ const operate = (e) => {
       res = num1 / num2;
     }
     op = "0";
-    resultado.innerHTML = res;
+    result.innerHTML = res;
 
-    operacion.value = op;
-    if (operacion.value == "") {
-      operacion.ariaPlaceholder = "0";
+    operation.value = op;
+    if (operation.value == "") {
+      operation.ariaPlaceholder = "0";
     }
   }
   //<------------ we need to rework this to apply what branko taught us and to extend functionality to floating point numbers ------------>//
@@ -49,18 +49,18 @@ const operate = (e) => {
 
 const initialiseClickHandler = () => {
   // this function should add the event listeners for the clickable UI
-  operacion.addEventListener("click", (e) => operate(e));
+  operation.addEventListener("click", (e) => operate(e));
 };
 
 const initialiseKeyboardHandler = () => {
   // we need to also add event listeners for keyboard responsiveness
-  operacion.addEventListener("keyup", (e) => operate(e));
+  operation.addEventListener("keyup", (e) => operate(e));
 };
 
 //<------------ original logic from Jero's forked repo ------------>//
 
-for (let i = 0; i < botones.length; i++) {
-  let element = botones[i];
+for (let i = 0; i < buttons.length; i++) {
+  let element = buttons[i];
   element.addEventListener("click", (e) => {
     let op = element.innerHTML.toString();
     console.log(op);
@@ -87,7 +87,7 @@ for (let i = 0; i < botones.length; i++) {
         res = num1 / num2;
       }
       completo = "0";
-      resultado.innerHTML = res;
+      result.innerHTML = res;
     }
 
     if (op.charAt(0) == "<") {
@@ -97,9 +97,9 @@ for (let i = 0; i < botones.length; i++) {
     } else {
       completo += op;
     }
-    operacion.value = completo;
-    if (operacion.value == "") {
-      operacion.ariaPlaceholder = "0";
+    operation.value = completo;
+    if (operation.value == "") {
+      operation.ariaPlaceholder = "0";
     }
     console.log(completo);
   });
