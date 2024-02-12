@@ -1,4 +1,4 @@
-#Calculator
+# Calculator
 
 Using html and javascript to create a responsive and functional calculator.
 
