@@ -54,7 +54,6 @@ const operate = (e) => {
   // operate function - we can rework this and make sure to include floating point numbers and operations with more than 2 numbers
   // we also need to rework this to avoid using innerHTML if possible, and see if we can simplify this method
   // we need to rework this function to also accept keyboard number inputs
-
   //<------------ original logic from Jero's forked repo ------------>//
   let op = operation.value.toString();
   console.log(op);
@@ -100,6 +99,7 @@ const initialiseKeyboardHandler = () => {
   // we need to also add event listeners for keyboard responsiveness
   operation.addEventListener('keyup', (e) => operate(e));
 };
+
 
 //<------------ original logic from Jero's forked repo ------------>//
 
@@ -149,7 +149,7 @@ const initialiseKeyboardHandler = () => {
   });
 }*/
 const numberBtns = document.querySelectorAll('#Number')
-
+const operators = document.querySelectorAll('#diferent')
 // const inputNum = () => {
 //   // let number = 0
 //   numberBtns.forEach((button) => {
@@ -158,6 +158,21 @@ const numberBtns = document.querySelectorAll('#Number')
 //   })
 //   document.getElementById("operation").value += number
 // }
+const calculate =(arr, operator)=>{
+  switch (operator) {
+    case '+':
+      return addNumbers(arr[0], arr[1]);
+      
+    case '*':
+     return mulNumbers(arr[0], arr[1]);
+      
+    case '/':
+      return divNumbers(arr[0], arr[1]);
+      
+    case '-':
+      return subNumbers(arr[0], arr[1]);
+  }
+}
 
 
 const clearCalc = () => {
@@ -169,9 +184,23 @@ const clearCalc = () => {
 const initialiseButtonHandler = () => {
   numberBtns.forEach((button) => {
     button.addEventListener("click", () => {
-      operation.value += parseFloat(button.innerText);
+      operation.value += button.innerText;
     })
   })
+
+  operators.forEach((button) => {
+    button.addEventListener("click", () => {
+      operation.value += button.innerText;
+      numbersArr =  operation.value.split(/[-+*/]+/)
+    
+      if(numbersArr.length > 2){
+        operation.value = calculate(numbersArr,button.innerText )
+      }
+      
+    })
+  }
+  )
+
 }
 
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
