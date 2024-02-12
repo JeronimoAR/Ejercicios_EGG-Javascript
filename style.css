@@ -27,7 +27,6 @@ header {
 }
 
 input {
-    width: 35%;
     font-size: 30px;
     background-color: inherit;
     outline: none;
@@ -40,9 +39,7 @@ button {
     background-color: #9EB3B2;
     border: 2px solid transparent;
     text-align: center;
-    border-radius: 3px;
     width: 70px;
-    height: 22px;
     transition-duration: 0.3s;
 }
 
@@ -56,23 +53,24 @@ button:hover {
 
 .container {
     width: 100%;
-    height: 823px;
-    padding: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: black;
     font-size: 20px;
     text-align: center;
 }
 
-.container p {
-    width: 35%;
-    margin: 0 auto;
+.text {
+    width: 298px;
     border-bottom: 2px solid #fff;
     text-align: start;
 }
 
 .calculator {
     padding-top: 10px;
-    margin: 0 auto;
 }
 
 .calculator button {
