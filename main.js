@@ -6,6 +6,17 @@ let num1 = 0;
 let num2 = 0;
 let res = 0;
 
+function addNumbers(num1, num2) {
+  num1 = parseFloat(num1);
+  num2 = parseFloat(num2);
+
+  if (!isNaN(num1) && !isNaN(num2)) {
+    return num1 + num2;
+  } else {
+    return 'ERROR';
+  }
+}
+
 const operate = (e) => {
   // operate function - we can rework this and make sure to include floating point numbers and operations with more than 2 numbers
   // we also need to rework this to avoid using innerHTML if possible, and see if we can simplify this method
