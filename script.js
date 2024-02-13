@@ -158,6 +158,7 @@ const operators = document.querySelectorAll('#diferent')
 //   })
 //   document.getElementById("operation").value += number
 // }
+// Function that returns the answer based on the array of values provided and the operator
 const calculate =(arr, operator)=>{
   switch (operator) {
     case '+':
@@ -190,14 +191,24 @@ const initialiseButtonHandler = () => {
 
   operators.forEach((button) => {
     button.addEventListener("click", () => {
-      operation.value += button.innerText;
-      numbersArr =  operation.value.split(/[-+*/]+/)
-    
+      if (!button.innerText.includes("Clear") ){
+        //added spaces between the operators and numbers so i can split the input into an array
+        operation.value += " " + button.innerText + " ";
+        let numbersArr =  operation.value.split(" ")
+        // Splice the array so that we now have an array for the operator and another array for the numbers
+        let operatorsArr = numbersArr.splice(1, 1)  
       if(numbersArr.length > 2){
-        operation.value = calculate(numbersArr,button.innerText )
+        // use calculate function to do the calculation based on the operator in the operator array
+        operation.value = calculate(numbersArr, operatorsArr[0] )
+        if (!button.innerText.includes('=')){
+          operation.value += " " + button.innerText + " ";
+        }
       }
-      
-    })
+      numbersArr.length = 0
+      operatorsArr.length = 0
+    }
+      }
+     )
   }
   )
 
