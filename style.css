@@ -80,11 +80,11 @@ button:hover {
     font-size: 19px;
 }
 
-#diferent {
+#operator {
     background-color: #D6BB24;
 }
 
-#diferent:hover {
+#operator:hover {
     background-color: inherit;
     /* Green */
     color: #D6BB24;
