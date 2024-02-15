@@ -9,7 +9,7 @@ let num2 = 0;
 let res = 0;
 
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
-const operatorKeys = ["-", "+", "*", "/"];
+const operatorKeys = ["-", "+", "*", "/", "Enter", "=", "Backspace"];
 
 function addNumbers(num1, num2) {
   num1 = parseFloat(num1);
@@ -121,7 +121,6 @@ const display = () => {
 const constructNumber = (n) => {
   console.log(n);
   if (numberKeys.indexOf(n) > -1) {
-    number+=n;
     return true;
   }
   else {
@@ -135,17 +134,31 @@ const inputRules = (i) => {
     if (!constructNumber(i.key)) {
       if (operatorStack.length > 0 && operatorStack[0]==="-" && number!=="") {
         let neg_sum = operate([0, number], operatorStack.shift());
-        number = neg_sum;
+        numberStack.push(neg_sum);
+        number="";
       }
-    }  // else do nothing because the number is being constructed
-  } else if (i.key === "Enter" || i.key === "=") {
-      // operatorStack.shift();
-      // console.log("The numberStack is:", numberStack);
-      // console.log("The operatorSack is:", operatorStack);
-    }
-    else if (i.key == "Backspace") {
+      else if (i.key === "="|| i.key === "Enter") {
+        if (number!=="") numberStack.push(number);
+        number="";
+      }
+      else if (i.key === "Backspace") {
 
-    }
+      }
+      else {
+        // else not case 1 - i.e. non-tricky/normal operations
+        if (number!=="") {
+          numberStack.push(number);
+          number="";
+        } else {
+          console.log("Operate like usual right?");
+        }
+      }
+    } else {  
+      // else keep constructing the number
+      // should automatically add 0 if . is chosen as the first numberKey
+      number+=i.key;
+    } 
+  } 
 }
 
 const initialiseKeyboardHandler = () => {
