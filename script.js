@@ -11,6 +11,13 @@ let res = 0;
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 const operatorKeys = ["-", "+", "*", "/", "Enter", "=", "Backspace"];
 
+let input = "";
+
+let output = "";
+const displayOutput = () => {
+  console.log("The output is", 0);
+};
+
 function addNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
@@ -25,6 +32,7 @@ function addNumbers(num1, num2) {
 function subNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
+  input = num1 + " - " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 - num2;
@@ -36,6 +44,7 @@ function subNumbers(num1, num2) {
 function mulNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
+  input = num1 + " * " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 * num2;
@@ -47,6 +56,7 @@ function mulNumbers(num1, num2) {
 function divNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
+  input = num1 + " / " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 / num2;
@@ -60,15 +70,23 @@ const operate = (arr, operator) => {
   switch (operator) {
     case "+":
       return addNumbers(arr.shift(), arr.shift());
+      break;
 
     case "*":
       return mulNumbers(arr.shift(), arr.shift());
+      break;
 
     case "/":
       return divNumbers(arr.shift(), arr.shift());
+      break;
 
     case "-":
       return subNumbers(arr.shift(), arr.shift());
+      break;
+    case "=":
+    case "Enter":
+      return 0;
+      break;
   }
 };
 
@@ -113,57 +131,73 @@ let operatorStack = [];
 let number = "";
 let answer = 0;
 
-const display = () => {
-  console.log("The answer is", answer);
-
+const calculate = () => {
+  
 };
 
 const constructNumber = (n) => {
-  console.log(n);
   if (numberKeys.indexOf(n) > -1) {
     return true;
-  }
-  else {
+  } else {
     operatorStack.push(n);
     return false;
   }
 };
 
+const displayInput = () => {
+  operation.value = input;
+};
+
+const FIRST_NEGATIVE =
+  operatorStack.length > 0 && operatorStack[0] === "-" && number !== "";
+const FIRST_MULTIPLY =
+  operatorStack.length > 0 && operatorStack[0] === "*" && number !== "";
+const FIRST_DIVIDE =
+  operatorStack.length > 0 && operatorStack[0] === "/" && number !== "";
+
 const inputRules = (i) => {
   if (numberKeys.indexOf(i.key) > -1 || operatorKeys.indexOf(i.key) > -1) {
     if (!constructNumber(i.key)) {
-      if (operatorStack.length > 0 && operatorStack[0]==="-" && number!=="") {
-        let neg_sum = operate([0, number], operatorStack.shift());
-        numberStack.push(neg_sum);
-        number="";
-      }
-      else if (i.key === "="|| i.key === "Enter") {
-        if (number!=="") numberStack.push(number);
-        number="";
-      }
-      else if (i.key === "Backspace") {
-
-      }
-      else {
-        // else not case 1 - i.e. non-tricky/normal operations
-        if (number!=="") {
-          numberStack.push(number);
-          number="";
-        } else {
-          console.log("Operate like usual right?");
+      if (FIRST_NEGATIVE || FIRST_MULTIPLY || FIRST_DIVIDE) {
+        let first_op = operate([0, number], operatorStack.shift());
+        numberStack.push(first_op);
+        number = "";
+      } else if (i.key === "=" || i.key === "Enter") {
+        // IF THE OPERATOR IS ENTER
+        if (number !== "") {
+          numberStack.push(parseFloat(number));
+          number = "";
         }
+      } else if (i.key === "Backspace") {
+        // IF THE OPERATOR IS BACKSPACE
+        // delete the last digit from active number
+      } else {
+        // IF THE FIRST OPERATION IS POSITIVE / ANY OTHER OPERATION IS USED
+        if (operatorStack.length > 0 && number !== "") {
+          console.log("You need to input a digit next!");
+          numberStack.push(parseFloat(number));
+          number = "";
+        } else {
+          console.log("You need to do something", numberStack, operatorStack);
+        }
+        // there must be a digit after the -
+        // there must be a number after an operator
       }
-    } else {  
+    } else {
       // else keep constructing the number
-      // should automatically add 0 if . is chosen as the first numberKey
-      number+=i.key;
-    } 
-  } 
-}
+      // if logic on the number variable
+      // number += i.key;
+      if (number.indexOf(".") > -1 && i.key === ".") number = number;
+      else number += i.key;
+    }
+  }
+};
 
 const initialiseKeyboardHandler = () => {
   //Getting Input from the keyboard
-  document.onkeydown = (e) => inputRules(e);
+  document.onkeydown = (e) => {
+    inputRules(e);
+  };
 };
 
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//

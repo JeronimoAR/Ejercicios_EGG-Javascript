@@ -18,7 +18,7 @@
         <section class="container">
             <h1>Calculator</h1>
             <!-- we should move all inline styling to the css stylesheet -->
-            <input class="text" id="operation" placeholder="0" value="0" disabled></input>
+            <input class="text" id="operation" placeholder="0" value="" disabled></input>
             <table class="calculator">
                 <tr>
                     <td><button class="buttons" id="Number" type="button">1</button></td>
@@ -41,14 +41,13 @@
                 <tr>
                     <td><button class="buttons" id="Number" type="button">.</button></td>
                     <td><button class="buttons" id="Number" type="button">0</button></td>
-                    <td><button class="buttons" id="Number" type="button">+/-</button></td>
+                    <td><button class="buttons" id="operator" type="button">=</button></td>
                     <td><button class="buttons" id="operator" type="button">/</button></td>
                 </tr>
                 <tr>
                     <!-- we can add a class here to center these buttons so it looks a bit better -->
                     <td><button class="buttons" id="operator" type="button"><i class='bx bx-arrow-back'></i></button></td>
                     <td><button class="buttons" id="operator" onclick="clearCalc()" type="button">Clear</button></td>
-                    <td><button class="buttons" id="operator" type="button">=</button></td>
                 </tr>
             </table>
             <p class="text">Result: <span id="result"></span></p>
