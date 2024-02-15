@@ -114,84 +114,43 @@ let number = "";
 let answer = 0;
 
 const display = () => {
-  if (numberStack.length >1) {
-    answer = operate(numberStack, operatorStack.shift());
-    numberStack.push(answer);
-  }
   console.log("The answer is", answer);
+
 };
 
 const constructNumber = (n) => {
-  if (number == "") {
-    // if they negate the first number
-    n == "-" ? (number += "-") : (number = n);
+  console.log(n);
+  if (numberKeys.indexOf(n) > -1) {
+    number+=n;
     return true;
-  } 
-  else if (number == "-" && n == '-') {
-    number = "";
-    return false;
   }
-  else if (numberKeys.indexOf(n) > -1) {
-    number += n;
-    return true;
-  } else {
-    numberStack.push(parseFloat(number));
-    number = "";
+  else {
+    operatorStack.push(n);
     return false;
   }
 };
 
+const inputRules = (i) => {
+  if (numberKeys.indexOf(i.key) > -1 || operatorKeys.indexOf(i.key) > -1) {
+    if (!constructNumber(i.key)) {
+      if (operatorStack.length > 0 && operatorStack[0]==="-" && number!=="") {
+        let neg_sum = operate([0, number], operatorStack.shift());
+        number = neg_sum;
+      }
+    }  // else do nothing because the number is being constructed
+  } else if (i.key === "Enter" || i.key === "=") {
+      // operatorStack.shift();
+      // console.log("The numberStack is:", numberStack);
+      // console.log("The operatorSack is:", operatorStack);
+    }
+    else if (i.key == "Backspace") {
+
+    }
+}
+
 const initialiseKeyboardHandler = () => {
   //Getting Input from the keyboard
-  document.onkeydown = function (e) {
-    console.log(e.key);
-    if (numberKeys.indexOf(e.key) > -1 || operatorKeys.indexOf(e.key) > -1) {
-      console.log("A.1. IF KEYS ARE VALID");
-      // positive number
-      if (constructNumber(e.key)) {
-        console.log("Construct a number");
-      } else {
-        console.log("Encounter an operator");
-        operatorStack.push(e.key);
-        display();
-        console.log(e.key, numberStack);
-      }
-    } else if (e.key == "Enter" || e.key == "=") {
-      if (number != "") {
-        numberStack.push(parseFloat(number));
-        number = "";
-        display();
-      }
-      console.log("A.2. IF KEY IS ENTER OR EQUALS");
-      console.log(number, numberStack, operatorStack);
-      // answer = operate(numberStack, operatorStack.shift());
-    }
-    // decimal number starting with 0
-    // negative number
-
-    //   if (numberKey.indexOf(e.key) > -1) {
-    //     operation.value += e.key;
-    //   }
-    //   if (operatorKeys.indexOf(e.key) > -1) {
-    //     console.log("Operator Key:", e.key);
-
-    //     operation.value += " " + e.key + " ";
-    //     console.log("Operation vlaue:", operation.value);
-    //     let numbersArr = operation.value.split(" ");
-    //     // Splice the array so that we now have an array for the operator and another array for the numbers
-    //     let operatorsArr = numbersArr.splice(1, 1);
-    //     if (numbersArr.length > 2) {
-    //       // use operate function to do the calculation based on the operator in the operator array
-    //       operation.value = operate(numbersArr, operatorsArr[0]);
-    //       if (!e.key.includes("Enter")) {
-    //         operation.value += " " + e.key + " ";
-    //       }
-    //     }
-    //   } else if (e.key == "Backspace") {
-    //     clearCalc();
-    //   }
-    display();
-  };
+  document.onkeydown = (e) => inputRules(e);
 };
 
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
