@@ -1,25 +1,24 @@
 const numberBtns = document.querySelectorAll("#Number");
-// const operators = document.querySelectorAll("#operator");
+
+const equals_button = document.getElementById("equals");
+const clear_button = document.getElementById("clear");
+const backspace_button = document.getElementById("backspace");
 const multiply_button = document.getElementById("multiply");
 const add_button = document.getElementById("add");
 const divide_button = document.getElementById("divide");
 const subtract_button = document.getElementById("subtract");
+const operation = document.querySelector("input");
+const result = document.getElementById("result");
 
-let botones = document.getElementsByClassName("buttons");
-let operation = document.querySelector("input");
-let result = document.getElementById("result");
-let textResult = "";
-let num1 = 0;
-let num2 = 0;
-let res = 0;
+let numberStack = [];
+let operatorStack = [];
+let number = "";
+let answer = 0;
 
 const numberKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 const operatorKeys = ["-", "+", "*", "/", "Enter", "=", "Backspace"];
 
 function addNumbers(num1, num2) {
-  num1 = parseFloat(num1);
-  num2 = parseFloat(num2);
-
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 + num2;
   } else {
@@ -28,9 +27,6 @@ function addNumbers(num1, num2) {
 }
 
 function subNumbers(num1, num2) {
-  num1 = parseFloat(num1);
-  num2 = parseFloat(num2);
-
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 - num2;
   } else {
@@ -39,9 +35,6 @@ function subNumbers(num1, num2) {
 }
 
 function mulNumbers(num1, num2) {
-  num1 = parseFloat(num1);
-  num2 = parseFloat(num2);
-
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 * num2;
   } else {
@@ -50,9 +43,6 @@ function mulNumbers(num1, num2) {
 }
 
 function divNumbers(num1, num2) {
-  num1 = parseFloat(num1);
-  num2 = parseFloat(num2);
-
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 / num2;
   } else {
@@ -86,9 +76,6 @@ const operate = (arr, operator) => {
 };
 
 const clear = () => {
-  // operation.value = "";
-  // operation.ariaPlaceholder = "0";
-  // console.log("clear");
   answer = 0;
   number = "";
   numberStack = [];
@@ -109,6 +96,36 @@ const initialiseButtonHandler = () => {
   //     operation.value += button.innerText;
   //   });
   // });
+  numberBtns.forEach( (button) => {
+    button.addEventListener("click", () => displayInput(inputRules(button.value)));
+  })
+  
+  add_button.addEventListener("click", () => {
+    displayInput(inputRules(add_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  subtract_button.addEventListener("click", () => {
+    displayInput(inputRules(subtract_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  multiply_button.addEventListener("click", () => {
+    displayInput(inputRules(multiply_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  divide_button.addEventListener("click", () => {
+    displayInput(inputRules(divide_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  backspace_button.addEventListener("click", () => {
+    displayInput(inputRules(backspace_button.value));
+  });
+  clear_button.addEventListener("click", () => {
+    displayInput(clear());
+    displayOutput();
+  });
+  equals_button.addEventListener("click", () => {
+    displayInput(inputRules(equals_button.value));
+  });
 
   //adding event handlers for the operator buttons
   // operators.forEach((button) => {
@@ -133,10 +150,7 @@ const initialiseButtonHandler = () => {
   // });
 };
 
-let numberStack = [];
-let operatorStack = [];
-let number = "";
-let answer = 0;
+
 
 const calculate = (terminate) => {
   console.log("Calculate the answer!");
@@ -159,8 +173,9 @@ const calculate = (terminate) => {
 const displayInput = () => {
   operation.value = number;
 };
+
 const displayOutput = (answer) => {
-  result.innerText = answer;
+  answer!==undefined ? result.innerText = answer : result.innerText = 0;
 };
 
 const constructNumber = (n) => {
@@ -203,9 +218,10 @@ const displayActiveOperator = (operator) => {
   }
 };
 
-const inputRules = (i) => {
-  if (numberKeys.indexOf(i.key) > -1 || operatorKeys.indexOf(i.key) > -1) {
-    if (!constructNumber(i.key)) {
+const inputRules = (key) => {
+
+  if (numberKeys.indexOf(key) > -1 || operatorKeys.indexOf(key) > -1) {
+    if (!constructNumber(key)) {
       if (
         numberStack.length == 0 &&
         operatorStack.length > numberStack.length &&
@@ -216,15 +232,15 @@ const inputRules = (i) => {
         number = "";
       }
 
-      if (i.key === "=" || i.key === "Enter") {
+      if (key === "=" || key === "Enter") {
         // IF THE OPERATOR IS ENTER
         if (number !== "") {
           numberStack.push(parseFloat(number));
           number = "";
         }
-        displayActiveOperator(i.key);
+        displayActiveOperator(key);
         calculate(true);
-      } else if (i.key === "Backspace") {
+      } else if (key === "Backspace") {
         // IF THE OPERATOR IS BACKSPACE
         backspace();
       } else {
@@ -233,12 +249,12 @@ const inputRules = (i) => {
           console.log("You need to input a digit next!");
           numberStack.push(parseFloat(number));
           number = "";
-          operatorStack.push(i.key);
+          operatorStack.push(key);
 
-          console.log(i.key);
-          displayActiveOperator(i.key);
+          console.log(key);
+          displayActiveOperator(key);
         } else {
-          // console.log("Operator/number handling", numberStack, operatorStack, '\n', "Number:", number, '\n', "Key:", i.key);
+          // console.log("Operator/number handling", numberStack, operatorStack, '\n', "Number:", number, '\n', "Key:", key);
           // EDGE CASE
           if (number !== "" && parseFloat(number) > 0) {
             numberStack.push(parseFloat(number));
@@ -250,33 +266,33 @@ const inputRules = (i) => {
           if (
             number === "" &&
             numberStack.length === 0 &&
-            (i.key === "*") | (i.key === "/") | (i.key === "+")
+            (key === "*") | (key === "/") | (key === "+")
           ) {
             console.log("No operators as first input");
           } else if (operatorStack.length == numberStack.length) {
             console.log("More operators than numbers!");
-            operatorStack.splice(-1, 1, i.key);
+            operatorStack.splice(-1, 1, key);
             console.log(operatorStack.slice(-1)[0]);
             displayActiveOperator(operatorStack.slice(-1)[0]);
           } else {
-            operatorStack.push(i.key);
-            console.log(i.key);
-            displayActiveOperator(i.key);
+            operatorStack.push(key);
+            console.log(key);
+            displayActiveOperator(key);
           }
         }
       }
     } else {
       // else keep constructing the number
       // if logic on the number variable
-      // number += i.key;
-      number.indexOf(".") > -1 && i.key === "."
+      // number += key;
+      number.indexOf(".") > -1 && key === "."
         ? (number = number)
-        : (number += i.key);
-      // if (number.indexOf(".") > -1 && i.key === ".") {
+        : (number += key);
+      // if (number.indexOf(".") > -1 && key === ".") {
       //   number = number;
       // }
       // else {
-      //   number += i.key;
+      //   number += key;
       // }
     }
   }
@@ -285,7 +301,7 @@ const inputRules = (i) => {
 const initialiseKeyboardHandler = () => {
   //Getting Input from the keyboard
   document.onkeydown = (e) => {
-    displayInput(inputRules(e));
+    displayInput(inputRules(e.key));
     if (numberStack.length > 1) calculate(false);
   };
 };
@@ -294,7 +310,7 @@ const initialiseKeyboardHandler = () => {
 
 const main = () => {
   initialiseKeyboardHandler();
-  // initialiseButtonHandler();
+  initialiseButtonHandler();
 };
 
 main();
