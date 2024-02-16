@@ -46,11 +46,11 @@
                 </tr>
                 <tr>
                     <!-- we can add a class here to center these  so it looks a bit better -->
-                    <td><button class="operator" id="operator" type="button"><i class='bx bx-arrow-back'></i></button></td>
-                    <td><button class="operator" id="operator" onclick="clearCalc()" type="button">Clear</button></td>
+                    <td><button class="operator" id="operator" onclick="backspace()" type="button"><i class='bx bx-arrow-back'></i></button></td>
+                    <td><button class="operator" id="operator" onclick="clear()" type="button">Clear</button></td>
                 </tr>
             </table>
-            <p class="text">Result: <span id="result"></span></p>
+            <p class="text">= <span id="result"></span></p>
         </section>
     </main>
     <footer></footer>
