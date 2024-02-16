@@ -49,7 +49,6 @@ function divNumbers(num1, num2) {
     return "ERROR";
   }
 }
-
 // Function that returns the answer based on the array of values provided and the operator
 const operate = (arr, operator) => {
   switch (operator) {
@@ -89,69 +88,6 @@ const backspace = () => {
   number = temp.join('');
 }
 
-const initialiseButtonHandler = () => {
-
-  // numberBtns.forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     operation.value += button.innerText;
-  //   });
-  // });
-  numberBtns.forEach( (button) => {
-    button.addEventListener("click", () => displayInput(inputRules(button.value)));
-  })
-  
-  add_button.addEventListener("click", () => {
-    displayInput(inputRules(add_button.value));
-    if (numberStack.length > 1) calculate(false);
-  });
-  subtract_button.addEventListener("click", () => {
-    displayInput(inputRules(subtract_button.value));
-    if (numberStack.length > 1) calculate(false);
-  });
-  multiply_button.addEventListener("click", () => {
-    displayInput(inputRules(multiply_button.value));
-    if (numberStack.length > 1) calculate(false);
-  });
-  divide_button.addEventListener("click", () => {
-    displayInput(inputRules(divide_button.value));
-    if (numberStack.length > 1) calculate(false);
-  });
-  backspace_button.addEventListener("click", () => {
-    displayInput(inputRules(backspace_button.value));
-  });
-  clear_button.addEventListener("click", () => {
-    displayInput(clear());
-    displayOutput();
-  });
-  equals_button.addEventListener("click", () => {
-    displayInput(inputRules(equals_button.value));
-  });
-
-  //adding event handlers for the operator buttons
-  // operators.forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     if (!button.innerText.includes("Clear")) {
-  //       //added spaces between the operators and numbers so i can split the input into an array
-  //       operation.value += " " + button.innerText + " ";
-  //       let numbersArr = operation.value.split(" ");
-  //       // Splice the array so that we now have an array for the operator and another array for the numbers
-  //       let operatorsArr = numbersArr.splice(1, 1);
-  //       if (numbersArr.length > 2) {
-  //         // use operate function to do the calculation based on the operator in the operator array
-  //         operation.value = operate(numbersArr, operatorsArr[0]);
-  //         if (!button.innerText.includes("=")) {
-  //           operation.value += " " + button.innerText + " ";
-  //         } else console.log("A");
-  //       } else console.log("B");
-  //       numbersArr.length = 0;
-  //       operatorsArr.length = 0;
-  //     }
-  //   });
-  // });
-};
-
-
-
 const calculate = (terminate) => {
   console.log("Calculate the answer!");
 
@@ -176,11 +112,6 @@ const displayInput = () => {
 
 const displayOutput = (answer) => {
   answer!==undefined ? result.innerText = answer : result.innerText = 0;
-};
-
-const constructNumber = (n) => {
-  if (numberKeys.indexOf(n) > -1) return true;
-  else return false;
 };
 
 const displayActiveOperator = (operator) => {
@@ -216,6 +147,11 @@ const displayActiveOperator = (operator) => {
       multiply_button.classList.remove("active");
       divide_button.classList.remove("active");
   }
+};
+
+const constructNumber = (n) => {
+  if (numberKeys.indexOf(n) > -1) return true;
+  else return false;
 };
 
 const inputRules = (key) => {
@@ -304,6 +240,67 @@ const initialiseKeyboardHandler = () => {
     displayInput(inputRules(e.key));
     if (numberStack.length > 1) calculate(false);
   };
+};
+
+const initialiseButtonHandler = () => {
+
+  // numberBtns.forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     operation.value += button.innerText;
+  //   });
+  // });
+  numberBtns.forEach( (button) => {
+    button.addEventListener("click", () => displayInput(inputRules(button.value)));
+  })
+  
+  add_button.addEventListener("click", () => {
+    displayInput(inputRules(add_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  subtract_button.addEventListener("click", () => {
+    displayInput(inputRules(subtract_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  multiply_button.addEventListener("click", () => {
+    displayInput(inputRules(multiply_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  divide_button.addEventListener("click", () => {
+    displayInput(inputRules(divide_button.value));
+    if (numberStack.length > 1) calculate(false);
+  });
+  backspace_button.addEventListener("click", () => {
+    displayInput(inputRules(backspace_button.value));
+  });
+  clear_button.addEventListener("click", () => {
+    displayInput(clear());
+    displayOutput();
+  });
+  equals_button.addEventListener("click", () => {
+    displayInput(inputRules(equals_button.value));
+  });
+
+  //adding event handlers for the operator buttons
+  // operators.forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     if (!button.innerText.includes("Clear")) {
+  //       //added spaces between the operators and numbers so i can split the input into an array
+  //       operation.value += " " + button.innerText + " ";
+  //       let numbersArr = operation.value.split(" ");
+  //       // Splice the array so that we now have an array for the operator and another array for the numbers
+  //       let operatorsArr = numbersArr.splice(1, 1);
+  //       if (numbersArr.length > 2) {
+  //         // use operate function to do the calculation based on the operator in the operator array
+  //         operation.value = operate(numbersArr, operatorsArr[0]);
+  //         if (!button.innerText.includes("=")) {
+  //           operation.value += " " + button.innerText + " ";
+  //         } else console.log("A");
+  //       } else console.log("B");
+  //       numbersArr.length = 0;
+  //       operatorsArr.length = 0;
+  //     }
+  //   });
+  // });
 };
 
 //<------------ all of this code should be in their own functions so we need to rework this logic ------------>//
