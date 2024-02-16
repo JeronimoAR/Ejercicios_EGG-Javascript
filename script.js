@@ -1,5 +1,10 @@
 const numberBtns = document.querySelectorAll("#Number");
-const operators = document.querySelectorAll("#operator");
+// const operators = document.querySelectorAll("#operator");
+const multiply_button = document.getElementById("multiply");
+const add_button = document.getElementById("add");
+const divide_button = document.getElementById("divide");
+const subtract_button = document.getElementById("subtract");
+
 let botones = document.getElementsByClassName("buttons");
 let operation = document.querySelector("input");
 let result = document.getElementById("result");
@@ -141,8 +146,38 @@ const constructNumber = (n) => {
   else return false;
 };
 
+const displayActiveOperator = (operator) => {
+  switch (operator) {
+    case '+':
+      add_button.classList.add('active');
+      subtract_button.classList.remove('active');
+      multiply_button.classList.remove('active');
+      divide_button.classList.remove('active');
+      break;
+    case '*':
+      add_button.classList.remove('active');
+      subtract_button.classList.remove('active');
+      multiply_button.classList.add('active');
+      divide_button.classList.remove('active');
+      break;
+    case '-':
+      add_button.classList.remove('active');
+      subtract_button.classList.add('active');
+      multiply_button.classList.remove('active');
+      divide_button.classList.remove('active');
+      break;
+    case '/':
+      add_button.classList.remove('active');
+      subtract_button.classList.remove('active');
+      multiply_button.classList.remove('active');
+      divide_button.classList.add('active');
+      break;
+  }
+}
+
 
 const inputRules = (i) => {
+
   if (numberKeys.indexOf(i.key) > -1 || operatorKeys.indexOf(i.key) > -1) {
     
     if (!constructNumber(i.key)) {
@@ -169,15 +204,17 @@ const inputRules = (i) => {
           numberStack.push(parseFloat(number));
           number = "";
           operatorStack.push(i.key);
+
+          console.log(i.key); displayActiveOperator(i.key);
         } else {
-          console.log("Operator/number handling", numberStack, operatorStack, '\n', "Number:", number, '\n', "Key:", i.key);
+          // console.log("Operator/number handling", numberStack, operatorStack, '\n', "Number:", number, '\n', "Key:", i.key);
           // EDGE CASE
           if (number!=="" && parseFloat(number) > 0) {
             numberStack.push(parseFloat(number));
             number = "";
           }
 
-          console.log("operatorStack vs numberStack length", operatorStack.length, numberStack.length);
+          // console.log("operatorStack vs numberStack length", operatorStack.length, numberStack.length);
           // OPERATOR RULE 1 - YOU CAN'T START WITH *, / OR +
           // OPERATOR RULE 2 - YOU MUST OVERWRITE OPERATORS INSTEAD OF ADDING TOO MANY
           if (number=== "" && numberStack.length ===0 && (i.key === '*' | i.key === '/' | i.key === '+')) {
@@ -186,9 +223,11 @@ const inputRules = (i) => {
           else if(operatorStack.length == numberStack.length) {
             console.log("More operators than numbers!");
             operatorStack.splice(-1,1,i.key);
+            console.log(operatorStack.slice(-1)[0]); displayActiveOperator(operatorStack.slice(-1)[0]);
           } 
           else {
             operatorStack.push(i.key);
+            console.log(i.key); displayActiveOperator(i.key);
           }
              
         }
@@ -219,7 +258,7 @@ const initialiseKeyboardHandler = () => {
 
 const main = () => {
   initialiseKeyboardHandler();
-  initialiseButtonHandler();
+  // initialiseButtonHandler();
 };
 
 main();

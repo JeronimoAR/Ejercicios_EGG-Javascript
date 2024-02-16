@@ -43,6 +43,7 @@ button {
     transition-duration: 0.3s;
 }
 
+
 button:hover {
     background-color: inherit;
     /* Green */
@@ -80,8 +81,12 @@ button:hover {
     font-size: 19px;
 }
 
-#operator {
+.operator {
     background-color: #D6BB24;
+}
+
+.operator.active {
+    background-color: #246bd6;
 }
 
 #operator:hover {
