@@ -137,18 +137,8 @@ const displayInput = () => {
 };
 
 const constructNumber = (n) => {
-  if (numberKeys.indexOf(n) > -1) {
-    return true;
-  } else {
-    // if (operatorStack.length <= numberStack.length) {
-    //   operatorStack.push(n);
-    // } else{
-    //   operatorStack.push(n);
-    //   console.log(numberStack, operatorStack, number)
-    // }
-    // operatorStack.push(n);
-    return false;
-  }
+  if (numberKeys.indexOf(n) > -1) return true;
+  else return false;
 };
 
 
@@ -180,28 +170,40 @@ const inputRules = (i) => {
           number = "";
           operatorStack.push(i.key);
         } else {
-          console.log("You need to do something", numberStack, operatorStack);
-          console.log("Number", number);
-          console.log(i.key);
-          operatorStack.push(i.key);
-          if (parseFloat(number) > 0) {
+          console.log("Operator/number handling", numberStack, operatorStack, '\n', "Number:", number, '\n', "Key:", i.key);
+          // EDGE CASE
+          if (number!=="" && parseFloat(number) > 0) {
             numberStack.push(parseFloat(number));
             number = "";
           }
+
+          console.log("operatorStack vs numberStack length", operatorStack.length, numberStack.length);
+          // OPERATOR RULE 1 - YOU CAN'T START WITH *, / OR +
+          // OPERATOR RULE 2 - YOU MUST OVERWRITE OPERATORS INSTEAD OF ADDING TOO MANY
+          if (number=== "" && numberStack.length ===0 && (i.key === '*' | i.key === '/' | i.key === '+')) {
+            console.log("No operators as first input");
+          } 
+          else if(operatorStack.length == numberStack.length) {
+            console.log("More operators than numbers!");
+            operatorStack.splice(-1,1,i.key);
+          } 
+          else {
+            operatorStack.push(i.key);
+          }
+             
         }
-        // there must be a digit after the -
-        // there must be a number after an operator
       }
     } else {
       // else keep constructing the number
       // if logic on the number variable
       // number += i.key;
-      if (number.indexOf(".") > -1 && i.key === ".") {
-        number = number;
-      }
-      else {
-        number += i.key;
-      }
+      number.indexOf('.') > -1 && i.key === '.' ? number = number : number += i.key;
+      // if (number.indexOf(".") > -1 && i.key === ".") {
+      //   number = number;
+      // }
+      // else {
+      //   number += i.key;
+      // }
     }
   }
 };
