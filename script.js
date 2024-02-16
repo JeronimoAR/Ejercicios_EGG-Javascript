@@ -32,7 +32,6 @@ function addNumbers(num1, num2) {
 function subNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
-  input = num1 + " - " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 - num2;
@@ -44,7 +43,6 @@ function subNumbers(num1, num2) {
 function mulNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
-  input = num1 + " * " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 * num2;
@@ -56,7 +54,6 @@ function mulNumbers(num1, num2) {
 function divNumbers(num1, num2) {
   num1 = parseFloat(num1);
   num2 = parseFloat(num2);
-  input = num1 + " / " + num2;
 
   if (!isNaN(num1) && !isNaN(num2)) {
     return num1 / num2;
@@ -135,34 +132,36 @@ const calculate = () => {
   
 };
 
+const displayInput = () => {
+  operation.value=number;
+};
+
 const constructNumber = (n) => {
   if (numberKeys.indexOf(n) > -1) {
     return true;
   } else {
-    operatorStack.push(n);
+    if (operatorStack.length <= numberStack.length) {
+      operatorStack.push(n);
+    } else {
+      
+    }
     return false;
   }
 };
 
-const displayInput = () => {
-  operation.value = input;
-};
-
-const FIRST_NEGATIVE =
-  operatorStack.length > 0 && operatorStack[0] === "-" && number !== "";
-const FIRST_MULTIPLY =
-  operatorStack.length > 0 && operatorStack[0] === "*" && number !== "";
-const FIRST_DIVIDE =
-  operatorStack.length > 0 && operatorStack[0] === "/" && number !== "";
 
 const inputRules = (i) => {
   if (numberKeys.indexOf(i.key) > -1 || operatorKeys.indexOf(i.key) > -1) {
+    
     if (!constructNumber(i.key)) {
-      if (FIRST_NEGATIVE || FIRST_MULTIPLY || FIRST_DIVIDE) {
-        let first_op = operate([0, number], operatorStack.shift());
+
+      if (operatorStack.length > numberStack.length + 1  && number!=="") {
+        let first_op = operate([0, parseFloat(number)], operatorStack.shift());
         numberStack.push(first_op);
         number = "";
-      } else if (i.key === "=" || i.key === "Enter") {
+      }
+      
+      if (i.key === "=" || i.key === "Enter") {
         // IF THE OPERATOR IS ENTER
         if (number !== "") {
           numberStack.push(parseFloat(number));
@@ -172,13 +171,14 @@ const inputRules = (i) => {
         // IF THE OPERATOR IS BACKSPACE
         // delete the last digit from active number
       } else {
-        // IF THE FIRST OPERATION IS POSITIVE / ANY OTHER OPERATION IS USED
+        // IF ANY OTHER OPERATION IS USED
         if (operatorStack.length > 0 && number !== "") {
           console.log("You need to input a digit next!");
           numberStack.push(parseFloat(number));
           number = "";
         } else {
           console.log("You need to do something", numberStack, operatorStack);
+          console.log(i.key);
         }
         // there must be a digit after the -
         // there must be a number after an operator
@@ -187,8 +187,12 @@ const inputRules = (i) => {
       // else keep constructing the number
       // if logic on the number variable
       // number += i.key;
-      if (number.indexOf(".") > -1 && i.key === ".") number = number;
-      else number += i.key;
+      if (number.indexOf(".") > -1 && i.key === ".") {
+        number = number;
+      }
+      else {
+        number += i.key;
+      }
     }
   }
 };
@@ -196,7 +200,7 @@ const inputRules = (i) => {
 const initialiseKeyboardHandler = () => {
   //Getting Input from the keyboard
   document.onkeydown = (e) => {
-    inputRules(e);
+    displayInput(inputRules(e));
   };
 };
 
