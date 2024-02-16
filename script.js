@@ -140,11 +140,13 @@ const constructNumber = (n) => {
   if (numberKeys.indexOf(n) > -1) {
     return true;
   } else {
-    if (operatorStack.length <= numberStack.length) {
-      operatorStack.push(n);
-    } else {
-      
-    }
+    // if (operatorStack.length <= numberStack.length) {
+    //   operatorStack.push(n);
+    // } else{
+    //   operatorStack.push(n);
+    //   console.log(numberStack, operatorStack, number)
+    // }
+    // operatorStack.push(n);
     return false;
   }
 };
@@ -155,7 +157,7 @@ const inputRules = (i) => {
     
     if (!constructNumber(i.key)) {
 
-      if (operatorStack.length > numberStack.length + 1  && number!=="") {
+      if (numberStack.length == 0 && operatorStack.length > numberStack.length  && number!=="" ) {
         let first_op = operate([0, parseFloat(number)], operatorStack.shift());
         numberStack.push(first_op);
         number = "";
@@ -176,9 +178,16 @@ const inputRules = (i) => {
           console.log("You need to input a digit next!");
           numberStack.push(parseFloat(number));
           number = "";
+          operatorStack.push(i.key);
         } else {
           console.log("You need to do something", numberStack, operatorStack);
+          console.log("Number", number);
           console.log(i.key);
+          operatorStack.push(i.key);
+          if (parseFloat(number) > 0) {
+            numberStack.push(parseFloat(number));
+            number = "";
+          }
         }
         // there must be a digit after the -
         // there must be a number after an operator
