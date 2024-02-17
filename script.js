@@ -44,7 +44,10 @@ function mulNumbers(num1, num2) {
 
 function divNumbers(num1, num2) {
   if (!isNaN(num1) && !isNaN(num2)) {
-    return num1 / num2;
+    if (num2 == 0) {
+      alert("The secrets to the universe won't be found by breaking this humble calculator, young Jedi.");
+      return 'Infinity & Beyond';
+    } else return num1 / num2;
   } else {
     return "ERROR";
   }
@@ -111,7 +114,7 @@ const displayInput = () => {
 };
 
 const displayOutput = (answer) => {
-  answer!==undefined ? result.innerText = answer : result.innerText = 0;
+  answer!==undefined ? result.innerText = answer : result.innerText = '';
 };
 
 const displayActiveOperator = (operator) => {
