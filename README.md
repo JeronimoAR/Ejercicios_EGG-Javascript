@@ -15,5 +15,3 @@ Team Members:
 - Jeronimo Arias
 - Kevin Kumasamba
 - Yonah Trachtman
-
-In this branch, I focused on making a main method call inputRules and other helper functions that receives correct input from either the keyboard or the clickable and UI, and uses logic to construct valid numbers and operations.
